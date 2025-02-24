@@ -47,9 +47,44 @@ Options that I chose: **JavaScript** and **React**.
 
 Let us now take a look at all the dependencies we will need for the project.
 
+(More dependencies might be added later but for now we start with these).
+
 We will use:
 
 ```
-Express
-TailwindCSS
+Express (https://expressjs.com/)
+TailwindCSS (https://tailwindcss.com/)
+```
+
+To install Express:
+
+```bash
+npm install express
+```
+
+To install TailwindCSS (please follow the official guide if things change):
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+Configure the Vite plugin (**_vite.config.ts_**):
+
+```javascript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+});
+```
+
+Import Tailwind CSS:
+
+Add an `@import` to your CSS file that imports Tailwinds CSS.
+
+```bash
+@import "tailwindcss";
 ```

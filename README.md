@@ -88,3 +88,13 @@ Add an `@import` to your CSS file that imports Tailwinds CSS.
 ```bash
 @import "tailwindcss";
 ```
+
+---
+
+#### Running the Project Locally
+
+Cd into **frontend** folder and:
+
+```
+npm run dev
+```

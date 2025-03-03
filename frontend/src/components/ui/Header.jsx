@@ -1,3 +1,5 @@
+import headerVideo from '../../../public/movie0000.mp4';
+
 export default function Header() {
   return (
     <div className='relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32'>
@@ -9,7 +11,7 @@ export default function Header() {
         playsInline
         className='absolute inset-0 -z-10 size-full object-cover'
       >
-        <source src='/movie0000.mp4' type='video/mp4' />
+        <source src={headerVideo} type='video/mp4' />
         Your browser does not support the video tag.
       </video>
 

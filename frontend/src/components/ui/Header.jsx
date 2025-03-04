@@ -1,4 +1,4 @@
-import headerVideo from '../../../public/movie0000.mp4';
+import headerVideo from '/movie0000.mp4';
 
 export default function Header() {
   return (

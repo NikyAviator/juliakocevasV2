@@ -68,6 +68,12 @@ To install TailwindCSS (please follow the official guide if things change):
 npm install tailwindcss @tailwindcss/vite
 ```
 
+I am also using Tailwind Plus and it depends on:
+
+```bash
+npm install @headlessui/react @heroicons/react
+```
+
 Configure the Vite plugin (**_vite.config.ts_**):
 
 ```javascript

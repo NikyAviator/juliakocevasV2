@@ -1,8 +1,32 @@
+import { useState } from 'react';
+import Modal from './Modal';
+
 const Card = ({ imageSrc, altText }) => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   return (
-    <div className='rounded-lg overflow-hidden shadow-lg'>
-      <img src={imageSrc} alt={altText} className='w-full h-64 object-cover' />
-    </div>
+    <>
+      {/* Image Thumbnail (Click to Open Modal) */}
+      <div
+        className='rounded-lg overflow-hidden shadow-lg cursor-pointer'
+        onClick={() => setSelectedImage(imageSrc)}
+      >
+        <img
+          src={imageSrc}
+          alt={altText}
+          className='w-full h-64 object-cover'
+        />
+      </div>
+
+      {/* Modal (Only Shows When an Image is Selected) */}
+      {selectedImage && (
+        <Modal
+          imageSrc={selectedImage}
+          altText={altText}
+          onClose={() => setSelectedImage(null)}
+        />
+      )}
+    </>
   );
 };
 

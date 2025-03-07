@@ -1,11 +1,9 @@
-'use client';
-
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 
 const Modal = ({ imageSrc, altText, onClose }) => {
   return (
     <Dialog open={true} onClose={onClose} className='relative z-10'>
-      {/* Dark Background (Click outside to close) */}
+      {/* Blurry background (Click outside to close) */}
       <DialogBackdrop className='fixed inset-0 bg-black/30 backdrop-blur-sm' />
 
       <div className='fixed inset-0 z-10 flex items-center justify-center'>

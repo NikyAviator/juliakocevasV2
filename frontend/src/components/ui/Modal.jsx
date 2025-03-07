@@ -1,21 +1,20 @@
 'use client';
 
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const Modal = ({ imageSrc, altText, onClose }) => {
   return (
     <Dialog open={true} onClose={onClose} className='relative z-10'>
       {/* Dark Background (Click outside to close) */}
-      <DialogBackdrop className='fixed inset-0 bg-black bg-opacity-50' />
+      <DialogBackdrop className='fixed inset-0 bg-black/30 backdrop-blur-sm' />
 
       <div className='fixed inset-0 z-10 flex items-center justify-center'>
-        <DialogPanel className='relative bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl'>
+        <DialogPanel className='relative bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-3xl'>
           {/* Close Button */}
           <button
             type='button'
             onClick={onClose}
-            className='absolute top-2 right-2 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-600'
+            className='absolute top-2 right-2 bg-black text-white rounded-full p-2 hover:bg-gray-600'
           >
             X
           </button>

@@ -20,9 +20,9 @@ export default function Header() {
 
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl lg:mx-0'>
-          <h2 className='text-5xl font-lobster tracking-tight text-white sm:text-7xl'>
+          <h1 className='text-5xl font-lobster tracking-tight text-white sm:text-7xl'>
             Welcome
-          </h2>
+          </h1>
           <p className='mt-8 text-lg font-medium text-gray-300 sm:text-xl/8'>
             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
             lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat

@@ -1,5 +1,5 @@
 # Step 1: Use Node.js 23.9-alpine3.20 as the base image (https://hub.docker.com/_/node?tab=description&amp%3Bpage=1&amp%3Bname=alpine)
-FROM node:23.9-alpine3.20 as dev
+FROM node:current-alpine as dev
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -13,8 +13,8 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Build the application
-RUN rpm run dev
+# Build the application #DEV MODE - CHANGE BEFORE PRODUCTION
+RUN npm run build
 
 # Step 2: Use an Nginx image to serve the static files
 # (https://www.docker.com/blog/how-to-use-the-official-nginx-docker-image/)
@@ -22,6 +22,22 @@ RUN rpm run dev
 
 FROM nginx:latest 
 
-# Copy the build files from the previous step to the default Nginx public directory
-# COPY ./index.html /usr/share/nginx/html/index.html
+# Setup working directory
+WORKDIR /usr/share/nginx/html
 
+# Remove default nginx static files
+RUN rm -rf ./*
+
+
+# Copy the static files from the previous stage
+# Change to dev to build before production
+COPY --from=dev /app/dist .
+
+# Copy the nginx configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose the port
+EXPOSE 80
+
+# Start the nginx server
+CMD ["nginx", "-g", "daemon off;"]

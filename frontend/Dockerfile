@@ -25,7 +25,6 @@ FROM nginx:latest
 # Setup working directory
 WORKDIR /usr/share/nginx/html
 
-# Remove default nginx static files
 RUN rm -rf ./*
 
 
@@ -43,3 +42,4 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
 # TEST TEST
+# test again

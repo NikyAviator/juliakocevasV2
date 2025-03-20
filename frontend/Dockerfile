@@ -41,6 +41,3 @@ EXPOSE 80
 # Start the nginx server
 CMD ["nginx", "-g", "daemon off;"]
 
-# TEST TEST
-# test again
-# gpg works now?

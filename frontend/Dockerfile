@@ -43,3 +43,4 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # TEST TEST
 # test again
+# gpg works now?

@@ -5,7 +5,7 @@ set -e
 
 # Define image and container name
 IMAGE_NAME="juliakocevas-v2"
-CONTAINER_NAME="juliakocevas-container"
+CONTAINER_NAME="jksite"
 PORT=8080
 
 echo "🔧 Building Docker image..."

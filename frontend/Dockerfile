@@ -28,9 +28,7 @@ WORKDIR /usr/share/nginx/html
 # Remove the placeholder site from the Nginx image
 RUN rm -rf ./*
 
-
 # Copy the static files from the previous stage
-# Change to dev to build before production
 COPY --from=build /app/dist .
 
 # Copy the nginx configuration file

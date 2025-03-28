@@ -20,7 +20,7 @@ RUN npm run build
 # (https://www.docker.com/blog/how-to-use-the-official-nginx-docker-image/)
 # (https://nginx.org/en/docs/beginners_guide.html#proxy)
 
-FROM nginx:latest 
+FROM nginx:alpine 
 
 # Setup working directory
 WORKDIR /usr/share/nginx/html

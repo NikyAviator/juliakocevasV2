@@ -191,13 +191,13 @@ Docker Hub images must follow this format:
 ```
 
 ```bash
-docker tag jksite-frontend <your-username>/juliakocevasV2-frontend:v1
+docker tag jksite-frontend <your-username>/juliakocevasv2-frontend:v1
 ```
 
 **OR**
 
 ```bash
-docker tag jksite-frontend <your-username>/juliakocevasV2-frontend:latest
+docker tag jksite-frontend <your-username>/juliakocevasv2-frontend:latest
 ```
 
 I am doing the latter, with **:latest** tag.
@@ -208,7 +208,7 @@ I am doing the latter, with **:latest** tag.
 #### 👉 Step 3: Push the Image to Docker Hub
 
 ```bash
-docker push <your-username>/juliakocevasV2-frontend:latest
+docker push <your-username>/juliakocevasv2-frontend:latest
 ```
 
 After pushing, you can verify and find your image at:

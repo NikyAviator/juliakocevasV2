@@ -8,6 +8,7 @@ This is a rework for my sisters website. I will redo it with React (Vite), Expre
   - [Create the Vite React Project](#create-the-vite-react-project)
   - [Installing Dependencies](#installing-dependencies)
   - [Running the Project Locally](#running-the-project-locally)
+- [DevOps](#devops)
 
 ---
 
@@ -103,4 +104,36 @@ Cd into **frontend** folder and:
 
 ```
 npm run dev
+```
+
+---
+
+### DevOps
+
+#### 🧠 TLDR: What is DevOps?
+
+**DevOps** is a combination of **Development** and **Operations**. It’s a cultural and technical approach to software development that aims to:
+
+- 🚀 Deliver software **faster** and **more reliably**
+- 🔁 Automate the **build → test → deploy** lifecycle
+- 🤝 Improve collaboration between devs and sysadmins
+- 📦 Use tools like **Docker**, **Kubernetes**, **CI/CD**, and **cloud platforms** like GCP or AWS
+
+In this project, DevOps plays a key role in:
+
+- Creating **Docker images** for deployment
+- Pushing images to **Docker Hub**
+- Using **Docker Compose** for local service orchestration
+- Preparing the project for **cloud deployment (GCP + Kubernetes)**
+
+---
+
+#### 🐳 Pushing Our Docker Image to Docker Hub
+
+We use **Docker** to containerize our frontend project, which lets us build and run the website consistently across environments.
+
+##### Step 1: Log in to Docker Hub
+
+```bash
+docker login
 ```

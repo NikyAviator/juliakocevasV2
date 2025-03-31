@@ -175,9 +175,9 @@ docker build -t jksite-frontend .
 
 🧠 This command:
 
-```bash
+```md
 - Uses the `Dockerfile` in the current directory (`.`)
-- Tags the image as **`jksite-frontend`** locally
+- Tags the image as **`jksite-frontend`** locally.
 ```
 
 ---
@@ -210,5 +210,8 @@ I am doing the latter, with **:latest** tag.
 ```bash
 docker push <your-username>/juliakocevasV2-frontend:latest
 ```
+
+After pushing, you can verify and find your image at:
+👉 https://hub.docker.com/repositories
 
 ---

@@ -14,6 +14,7 @@ This is a rework of my sister’s website. I will rebuild it using **React (Vite
 - [DevOps](#devops)
   - [Docker Quick Reference](#docker-quick-reference)
   - [Creating and Pushing Images to Docker Hub](#creating-and-pushing-images-to-docker-hub)
+  - [ Docker Compose Integration ]
 
 ---
 
@@ -201,6 +202,7 @@ docker tag jksite-frontend <your-username>/juliakocevasv2-frontend:latest
 ```
 
 I am doing the latter, with **:latest** tag.
+
 📝 My Docker Hub repo name is the same as my project repo name on GitHub.
 
 ---
@@ -215,3 +217,5 @@ After pushing, you can verify and find your image at:
 👉 https://hub.docker.com/repositories
 
 ---
+
+### Docker Compose Integration

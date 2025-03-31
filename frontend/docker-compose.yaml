@@ -1,4 +1,4 @@
-version: '3.8'
+name: jksite
 
 services:
   frontend:
@@ -9,4 +9,4 @@ services:
       - '8080:80'
     env_file:
       - .env
-    container_name: jksite
+    container_name: jksite-frontend

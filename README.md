@@ -1,14 +1,19 @@
 # juliakocevasV2
 
-This is a rework for my sisters website. I will redo it with React (Vite), Express, NodeJs &amp; Tailwind CSS.
+This is a rework of my sister’s website. I will rebuild it using **React (Vite)**, **Express**, **Node.js**, and **Tailwind CSS**.
 
-# Table of Contents
+---
+
+## Table of Contents
 
 - [Frontend Setup](#frontend-setup)
+  - [What is Node.js?](#what-is-nodejs)
   - [Create the Vite React Project](#create-the-vite-react-project)
   - [Installing Dependencies](#installing-dependencies)
   - [Running the Project Locally](#running-the-project-locally)
 - [DevOps](#devops)
+  - [Docker Quick Reference](#docker-quick-reference)
+  - [Creating and Pushing Images to Docker Hub](#creating-and-pushing-images-to-docker-hub)
 
 ---
 
@@ -53,8 +58,8 @@ Let us now take a look at all the dependencies we will need for the project.
 We will use:
 
 ```
-Express (https://expressjs.com/)
-TailwindCSS (https://tailwindcss.com/)
+Express (https://expressjs.com/) 🚅
+TailwindCSS (https://tailwindcss.com/)🌬️✈️
 ```
 
 To install Express:
@@ -117,7 +122,7 @@ npm run dev
 - 🚀 Deliver software **faster** and **more reliably**
 - 🔁 Automate the **build → test → deploy** lifecycle
 - 🤝 Improve collaboration between devs and sysadmins
-- 📦 Use tools like **Docker**, **Kubernetes**, **CI/CD**, and **cloud platforms** like GCP or AWS
+- 📦 Use tools like **Docker**, **Kubernetes**, **CI/CD**, and **cloud platforms** like GCP or AWS. We will use GCP.
 
 In this project, DevOps plays a key role in:
 
@@ -126,14 +131,80 @@ In this project, DevOps plays a key role in:
 - Using **Docker Compose** for local service orchestration
 - Preparing the project for **cloud deployment (GCP + Kubernetes)**
 
+#### Docker Quick Reference:
+
+🐋 Docker Quick Reference
+Here's a list of useful Docker commands (great for refreshing your memory):
+
+| Command                             | Description                                               |
+| ----------------------------------- | --------------------------------------------------------- |
+| `docker build -t name .`            | Build image from Dockerfile                               |
+| `docker images`                     | List all local Docker images                              |
+| `docker ps`                         | List running containers                                   |
+| `docker ps -a`                      | List all containers (running & stopped)                   |
+| `docker run -p 8080:80 image-name`  | Run a container and map ports                             |
+| `docker run --rm -it image-name sh` | Run container interactively (with shell) + --rm           |
+| `docker stop container-name`        | Stop a running container                                  |
+| `docker rm container-name`          | Remove a stopped container                                |
+| `docker rmi image-name`             | Delete an image                                           |
+| `docker system prune`               | Delete all stopped containers, dangling images, and cache |
+
 ---
 
-#### 🐳 Pushing Our Docker Image to Docker Hub
+### Creating and Pushing Images to Docker Hub
 
 We use **Docker** to containerize our frontend project, which lets us build and run the website consistently across environments.
 
-##### Step 1: Log in to Docker Hub
+#### 👉 Step 0: Log in to Docker Hub
 
 ```bash
 docker login
 ```
+
+You’ll be prompted to enter your Docker Hub username and password (or personal access token).
+
+First we want to create the image based on your most up do date code and tag it for version control.
+
+#### 👉 Step 1: Build the Image from Latest Source Code
+
+To build a Docker image based on your current project files and Dockerfile:
+
+```bash
+docker build -t jksite-frontend .
+```
+
+🧠 This command:
+
+```bash
+- Uses the `Dockerfile` in the current directory (`.`)
+- Tags the image as **`jksite-frontend`** locally
+```
+
+#### 👉 Step 2: Tag the Image
+
+Docker Hub images must follow this format:
+
+```php
+<your-username>/<repo-name>:<tag>
+```
+
+```bash
+docker tag jksite-frontend <your-username>/juliakocevasV2-frontend:v1
+```
+
+**OR**
+
+```bash
+docker tag jksite-frontend <your-username>/juliakocevasV2-frontend:latest
+```
+
+I am doing the latter, with **:latest** tag.
+📝 My Docker Hub repo name is the same as my project repo name on GitHub.
+
+#### 👉 Step 3: Push the Image to Docker Hub
+
+```bash
+docker push <your-username>/juliakocevasV2-frontend:latest
+```
+
+---

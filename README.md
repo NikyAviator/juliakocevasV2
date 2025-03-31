@@ -163,7 +163,7 @@ docker login
 
 You’ll be prompted to enter your Docker Hub username and password (or personal access token).
 
-First we want to create the image based on your most up do date code and tag it for version control.
+---
 
 #### 👉 Step 1: Build the Image from Latest Source Code
 
@@ -179,6 +179,8 @@ docker build -t jksite-frontend .
 - Uses the `Dockerfile` in the current directory (`.`)
 - Tags the image as **`jksite-frontend`** locally
 ```
+
+---
 
 #### 👉 Step 2: Tag the Image
 
@@ -200,6 +202,8 @@ docker tag jksite-frontend <your-username>/juliakocevasV2-frontend:latest
 
 I am doing the latter, with **:latest** tag.
 📝 My Docker Hub repo name is the same as my project repo name on GitHub.
+
+---
 
 #### 👉 Step 3: Push the Image to Docker Hub
 

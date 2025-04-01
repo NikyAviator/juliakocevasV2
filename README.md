@@ -14,7 +14,7 @@ This is a rework of my sister’s website. I will rebuild it using **React (Vite
 - [DevOps](#devops)
   - [Docker Quick Reference](#docker-quick-reference)
   - [Creating and Pushing Images to Docker Hub](#creating-and-pushing-images-to-docker-hub)
-  - [ Docker Compose Integration ]
+  - [Docker Compose Integration](#docker-compose-integration)
 
 ---
 
@@ -219,3 +219,53 @@ After pushing, you can verify and find your image at:
 ---
 
 ### Docker Compose Integration
+
+To interact with the **docker-compose-yaml** file, here are some useful commands:
+
+```bash
+docker compose up
+```
+
+🟢 Builds (if needed) and starts all services (in foreground)
+
+```bash
+docker compose up -d
+```
+
+🟢 Same as above, but runs in detached (background) mode
+
+```bash
+docker compose up --build
+```
+
+🔁 Forces a rebuild before starting
+
+```bash
+docker compose down
+```
+
+🛑 Stops and removes containers, networks, and volumes created
+
+```bash
+docker compose stop
+```
+
+🛑 Gracefully stops running services, but keeps containers for later
+
+```bash
+docker compose start
+```
+
+▶️ Restarts previously stopped containers
+
+```bash
+docker compose restart
+```
+
+🔄 Restarts containers (stop + start in one)
+
+```bash
+docker compose logs
+```
+
+📜 Shows logs from all containers

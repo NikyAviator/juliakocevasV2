@@ -15,6 +15,7 @@ This is a rework of my sister’s website. I will rebuild it using **React (Vite
   - [Docker Quick Reference](#docker-quick-reference)
   - [Creating and Pushing Images to Docker Hub](#creating-and-pushing-images-to-docker-hub)
   - [Docker Compose Integration](#docker-compose-integration)
+  - [Kubernetes / K8s](#kubernetes--k8s)
 
 ---
 
@@ -269,3 +270,131 @@ docker compose logs
 ```
 
 📜 Shows logs from all containers
+
+---
+
+# Kubernetes / K8s
+
+Now we have dockerized our project, let us take things to the next level by orchestrating and taking full control over our project by diving deep together into the world of K8s!
+
+The official website:
+
+```
+https://kubernetes.io/
+```
+
+## What is Kubernetes / K8s?
+
+The TLDR is: An open-source system for orchestrating container deployments.
+It handles things like:
+
+1. Automatic Deployment
+2. Scaling & Load Balancing
+3. Management (Monitoring and replacement of containers)
+
+We can and we later will write a **Kubernetes Configuration** that Any Cloud provider or Self Hosted can understand and deploy your end state.
+
+Let us now explain a few **key K8s concepts** that can clarify how all this works:
+
+### 1. Cluster
+
+A **Kubernetes cluster** is a collection of machines (physical or virtual) that work together to run and manage containerized applications. It usually consists of:
+
+- One or more Master Nodes (the control plane).
+- One or more Worker Nodes (where your workloads run).
+
+All these nodes communicate with each other, ensuring your applications run as expected, can scale, and are kept in a desired state.
+
+### 2. Nodes
+
+A **node** is a single machine (whether physical server or virtual machine) within a Kubernetes cluster. There are generally two types of nodes:
+
+- Master Node – Responsible for managing and controlling the cluster (the control plane).
+- Worker Node – Responsible for running your workloads (the containerized applications).
+
+Nodes have specific Kubernetes processes installed (like the kubelet, container runtime, etc.) that allow them to communicate with the cluster and host containers.
+
+### 3. Master Node
+
+The **Master Node** (also referred to as the Control Plane) controls and manages the entire Kubernetes cluster. It makes decisions about scheduling, scaling, and how workloads are orchestrated. Key components on the master node include:
+
+- **API Server**: The front-end to the Kubernetes control plane. It handles requests from users and tools (CLI, dashboard, etc.) and exposes the Kubernetes API.
+- **etcd**: A consistent and highly available key-value store where Kubernetes stores all cluster data.
+- **Scheduler**: Determines which node a new pod will be assigned to, based on resource availability and other constraints.
+- **Controller Manager**: Runs background processes that handle routine tasks (e.g., ensuring the correct number of pods, dealing with node failures, etc.).
+
+### 4. Worker Node
+
+A **Worker Node** actually runs the applications (containers) defined by your Kubernetes configuration. Key components on each worker node include:
+
+- **kubelet**: An agent that ensures containers run in a pod. It communicates with the API Server, receives instructions, and reports back on pod health and status.
+- **Container Runtime**: Responsible for running containers (e.g., Docker, containerd, CRI-O).
+- **kube-proxy**: Manages network rules on each node, allowing network communication to and from pods (e.g., load balancing, forwarding requests to correct pods).
+
+### 5. Pods
+
+A **Pod** is the smallest deployable unit in Kubernetes. You can think of it as a wrapper around one or more containers that share:
+
+- A network namespace (they share the same IP address).
+- Storage volumes (if configured).
+- Configuration such as environment variables.
+
+In most cases, you’ll have **one application container per pod**, but you can also have “sidecar” containers that complement the main container (e.g., a logging or monitoring agent).
+
+### 6. Containers
+
+**Containers** are the actual packages of software that contain your application code and all its dependencies. Kubernetes itself doesn’t create containers; instead, it relies on a **container runtime** (such as Docker or containerd) to run them.
+
+You define container images (e.g., with a Dockerfile).
+Kubernetes schedules and manages how many container instances (pods) should run and on which worker nodes.
+
+### 7. Services
+
+A Service in Kubernetes is an abstraction that provides a stable endpoint (IP or DNS name) and load-balancing across a set of pods. Because pods are ephemeral—they can come and go, and their IP addresses can change—Services allow you to expose and communicate with your applications reliably.
+
+- ClusterIP: Exposes the Service internally to the cluster.
+- NodePort: Exposes the Service on each node’s IP at a static port.
+- LoadBalancer: Exposes the Service externally using a cloud provider’s load balancer.
+
+The primary goal is to decouple where pods are running from how other services or external clients find and access them.
+
+### Putting it All Together
+
+1. You (or your CI/CD system) define container images and specify how many replicas (pods) you need.
+2. The **Master Node** (control plane) schedules these pods to run on the **Worker Nodes**.
+3. Each **Pod** runs one or more **Containers**.
+4. You create a **Service** to provide a stable network endpoint to these pods and to load-balance traffic among them.
+
+---
+
+# Installing Kubernetes locally
+
+When learning Kubernetes, it’s often easiest to run everything locally on your computer. On Arch Linux (or EndeavourOS, Manjaro, etc.), there are multiple ways to spin up a local K8s cluster. Below are a few popular options:
+
+1. Minikube – The most commonly used local K8s setup.
+2. k3s – A lightweight Kubernetes distribution from Rancher.
+3. MicroK8s – A Canonical-developed lightweight K8s option.
+
+We will use Minikube to host the website locally on a cluster on your computer before we host it on any Cloud Provider (GCP in this case).
+
+Always refer to the Arch Wiki & Minikube docs when in doubt about the installation etc:
+
+```
+https://wiki.archlinux.org/title/Kubernetes
+```
+
+```
+https://minikube.sigs.k8s.io/docs/
+```
+
+Kubernetes Distributions (Alternatives):
+
+```
+https://github.com/mikucat0309/awesome-kubernetes-distro
+```
+
+```
+https://nubenetes.com/matrix-table/
+```
+
+---

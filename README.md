@@ -206,6 +206,18 @@ I am doing the latter, with **:latest** tag.
 
 📝 My Docker Hub repo name is the same as my project repo name on GitHub.
 
+Side Note, **Tag** the image for **GCP**:
+
+To be able to tag and then to push to GCP we first need to Authenticate Docker with Artifact Registry:
+
+```bash
+gcloud auth configure-docker <region>-docker.pkg.dev
+```
+
+```bash
+docker tag <local-name> <registry-path>/<repo-name>/<image-name>:<tag>
+```
+
 ---
 
 #### 👉 Step 3: Push the Image to Docker Hub
@@ -217,7 +229,11 @@ docker push <your-username>/juliakocevasv2-frontend:latest
 After pushing, you can verify and find your image at:
 👉 https://hub.docker.com/repositories
 
----
+Side Note, **Push** the image to **GCP Artifact Registry**:
+
+```bash
+docker push <region>-docker.pkg.dev/<project-id>/<repository-name>/<image-name>:<tag>
+```
 
 ### Docker Compose Integration
 

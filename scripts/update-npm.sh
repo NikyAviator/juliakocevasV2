@@ -21,4 +21,4 @@ for dir in "$ROOT" "$ROOT/frontend"; do
     fi
 done
 
-echo "npm packages updated in all two directories."
+echo "All npm packages updated."

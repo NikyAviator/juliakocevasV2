@@ -115,8 +115,6 @@ but only when:
 
 - The cluster is completely borked and not worth debugging
 
-###
-
 To recreate stale pods:
 
 ```bash

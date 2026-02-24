@@ -1,5 +1,6 @@
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 
+// eslint-disable-next-line react/prop-types
 const Modal = ({ imageSrc, altText, onClose }) => {
   return (
     <Dialog open={true} onClose={onClose} className='relative z-10'>

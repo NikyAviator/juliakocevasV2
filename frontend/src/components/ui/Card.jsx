@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Modal from './Modal';
 
+// eslint-disable-next-line react/prop-types
 const Card = ({ imageSrc, altText }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 

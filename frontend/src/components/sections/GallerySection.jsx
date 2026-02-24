@@ -25,7 +25,7 @@ const imageFiles = [
 
 const GallerySection = () => {
   return (
-    <section className='py-12 px-6 bg-gradient-to-b from-gray-500 to-gray-800'>
+    <section className='py-12 px-6 bg-linear-to-b from-gray-500 to-gray-800'>
       <h2 className='text-4xl font-lobster font-bold text-center mb-8'>
         Gallery
       </h2>

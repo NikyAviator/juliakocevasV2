@@ -41,7 +41,7 @@ steps:
       - build-frontend
 
 # Store build logs
-logsBucket: gs://nikysite-build-logs
+logsBucket: gs://nikysite-build-logs # FIX - create this bucket in GCP and set permissions
 options:
   logging: GCS_ONLY
   machineType: 'E2_MEDIUM'

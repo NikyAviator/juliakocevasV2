@@ -23,11 +23,6 @@ export default function Header() {
           <h2 className='text-5xl font-lobster tracking-tight text-white sm:text-7xl'>
             Welcome
           </h2>
-          {/* <p className='mt-8 text-lg font-medium text-gray-300 sm:text-xl/8'>
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-            lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-            fugiat.
-          </p> */}
         </div>
       </div>
     </div>

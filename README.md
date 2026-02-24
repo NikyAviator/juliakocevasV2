@@ -71,7 +71,7 @@ To get a clear snapshot of any project you are working on, use:
 tree -I 'node_modules|.git|dist' -a -L 10
 ```
 
-To frontend dependencies in the project, cd inte **/scripts** folder and run:
+To update the frontend's dependencies, cd into **/scripts** folder and run:
 
 ```bash
 ./update-npm.sh

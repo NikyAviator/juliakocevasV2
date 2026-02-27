@@ -4,8 +4,8 @@
 
 substitutions:
   _REGION: europe-north1
-  _FRONTEND_REPO: jkv2-frontend # FIXED?
-  _FRONTEND_IMAGE: ${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_FRONTEND_REPO}/jkv2-frontend # FIXED?
+  _FRONTEND_REPO: jkv2-frontend
+  _FRONTEND_IMAGE: ${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_FRONTEND_REPO}/jkv2-frontend
 
 steps:
   # ---------- BUILD FRONTEND ----------
@@ -41,7 +41,7 @@ steps:
       - build-frontend
 
 # Store build logs
-logsBucket: gs://jkv2-build-logs # FIXED?
+logsBucket: gs://jkv2-build-logs
 options:
   logging: GCS_ONLY
   machineType: 'E2_MEDIUM'

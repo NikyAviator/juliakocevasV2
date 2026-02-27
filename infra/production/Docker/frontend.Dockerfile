@@ -1,4 +1,4 @@
-# Dockerfile for PRODUCTION
+# Dockerfile for PRODUCTION - JKV2
 # --- Build step ---
 FROM node:22-alpine AS build
 WORKDIR /app

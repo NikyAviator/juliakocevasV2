@@ -1,12 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
-.lobster-regular {
-  font-family: 'Lobster', 'sans-serif';
-  font-weight: 400;
-  font-style: normal;
-}
 @import 'tailwindcss';
 
 @theme {
-  --font-lobster: 'Lobster', 'sans-serif';
+  --font-display: 'Playfair Display', 'serif';
+  --font-sans: 'Inter', 'sans-serif';
+
+  --color-canvas: #faf7f2;
+  --color-ink: #1c1a17;
+  --color-ink-muted: #5c5750;
+  --color-accent: #8a6d4a;
+  --color-border: #e4ded3;
+  --color-surface: #ffffff;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
 }

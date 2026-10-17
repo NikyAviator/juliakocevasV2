@@ -25,13 +25,18 @@ const imageFiles = [
 
 const GallerySection = () => {
   return (
-    <section className='py-12 px-6 bg-linear-to-b from-gray-500 to-gray-800'>
-      <h2 className='text-4xl font-lobster font-bold text-center mb-8'>
+    <section className='bg-canvas py-24 px-6'>
+      <h2 className='font-display text-center text-4xl text-ink mb-16'>
         Gallery
       </h2>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+      <div className='mx-auto max-w-7xl columns-1 gap-6 sm:columns-2 md:columns-3 lg:columns-4'>
         {imageFiles.map((image, index) => (
-          <Card key={index} imageSrc={image} altText={`Image ${index + 1}`} />
+          <Card
+            key={image}
+            imageSrc={image}
+            altText={`Image ${index + 1}`}
+            index={index}
+          />
         ))}
       </div>
     </section>

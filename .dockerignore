@@ -1,0 +1,9 @@
+# Build context is the repo root (see Tiltfile / cloudbuild), so this file —
+# not frontend/.dockerignore — is the one Docker actually reads.
+**/node_modules
+**/dist
+.git
+**/.env
+**/*.log
+.vscode
+**/.DS_Store

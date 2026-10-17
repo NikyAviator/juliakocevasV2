@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import Card from '../ui/Card';
+import Modal from '../ui/Modal';
 
 // Define image sources (assuming they are in `/public/`)
 const imageFiles = [
@@ -24,6 +26,15 @@ const imageFiles = [
 ];
 
 const GallerySection = () => {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const isOpen = lightboxIndex !== null;
+  const total = imageFiles.length;
+
+  const closeLightbox = () => setLightboxIndex(null);
+  const showNext = () => setLightboxIndex((i) => (i + 1) % total);
+  const showPrev = () => setLightboxIndex((i) => (i - 1 + total) % total);
+
   return (
     <section className='bg-canvas py-24 px-6'>
       <h2 className='font-display text-center text-4xl text-ink mb-16'>
@@ -36,9 +47,20 @@ const GallerySection = () => {
             imageSrc={image}
             altText={`Image ${index + 1}`}
             index={index}
+            onOpen={() => setLightboxIndex(index)}
           />
         ))}
       </div>
+
+      {isOpen && (
+        <Modal
+          imageSrc={imageFiles[lightboxIndex]}
+          altText={`Image ${lightboxIndex + 1}`}
+          onClose={closeLightbox}
+          onNext={showNext}
+          onPrev={showPrev}
+        />
+      )}
     </section>
   );
 };

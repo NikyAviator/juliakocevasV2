@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Modal from './Modal';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -12,31 +10,19 @@ const fadeUp = {
 };
 
 // eslint-disable-next-line react/prop-types
-const Card = ({ imageSrc, altText, index = 0 }) => {
-  const [selectedImage, setSelectedImage] = useState(null);
-
+const Card = ({ imageSrc, altText, index = 0, onOpen }) => {
   return (
-    <>
-      <motion.div
-        className='mb-6 overflow-hidden border border-border bg-surface break-inside-avoid cursor-pointer'
-        onClick={() => setSelectedImage(imageSrc)}
-        initial='hidden'
-        whileInView='visible'
-        viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
-        custom={(index % 6) * 0.08}
-      >
-        <img src={imageSrc} alt={altText} className='w-full h-auto object-cover' />
-      </motion.div>
-
-      {selectedImage && (
-        <Modal
-          imageSrc={selectedImage}
-          altText={altText}
-          onClose={() => setSelectedImage(null)}
-        />
-      )}
-    </>
+    <motion.div
+      className='mb-6 overflow-hidden border border-border bg-surface break-inside-avoid cursor-pointer'
+      onClick={onOpen}
+      initial='hidden'
+      whileInView='visible'
+      viewport={{ once: true, amount: 0.3 }}
+      variants={fadeUp}
+      custom={(index % 6) * 0.08}
+    >
+      <img src={imageSrc} alt={altText} className='w-full h-auto object-cover' />
+    </motion.div>
   );
 };
 

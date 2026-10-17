@@ -86,27 +86,12 @@ why): `it-business/tools/k8s/k8s.md`, Case study 1.
 
 ---
 
-Then enable ingress addons in minikube:
+Then enable the addons in minikube:
 
 ```bash
 minikube addons enable ingress
 ```
 
-Registry setup — required, any driver (containerd runtime)
-This part is not optional and not specific to any one driver — minikube's node runtime is containerd (Kubernetes removed support for Docker as an in-cluster runtime a while back), and containerd cannot see images sitting in your host's own Docker daemon. Without this step, tilt up fails with docker push: ... denied: requested access to the resource is denied — it's silently trying to push to Docker Hub's reserved library/ namespace, since no registry is configured.
-
-The fix is the officially-supported one, not a workaround: minikube ships its own in-cluster registry addon specifically for this, and Tilt has a built-in default_registry(...) function made to point at exactly this kind of registry.
-
+```bash
 minikube addons enable registry
-
-Already wired into this project's Tiltfile:
-
-default_registry('localhost:5000')
-
-local_resource(
-'registry-pf',
-serve_cmd='kubectl -n kube-system port-forward svc/registry 5000:80',
-allow_parallel=True,
-)
-
-Why localhost:5000 works identically for both the push (from your host) and the pull (from inside the cluster) despite being two different processes: your host's kubectl port-forward tunnels its own localhost:5000 straight to the registry Service; separately, the addon also runs a registry-proxy on the node itself, listening on that node's own localhost:5000, forwarding to the same registry. Same address, resolved locally and correctly on both ends. Full explanation: it-business/tools/k8s/k8s.md.
+```

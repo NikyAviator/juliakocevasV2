@@ -61,68 +61,52 @@ minikube config view # To check the set resources
 minikube start
 ```
 
+#### Known issue: ARP replies disabled inside the node (fix before `enable ingress`)
+
+As of 2026-09, a fresh `minikube start` on this machine boots with
+`net.ipv4.conf.all.arp_ignore = 2` inside the node. That setting makes the
+kernel refuse to answer ARP requests unless the requester shares a subnet
+with the interface being asked — but every pod's gateway is a `/32`
+(single-address) interface by design (via `kindnet`, minikube's CNI), which
+can never satisfy that check. Result: pods can't even resolve their
+gateway's MAC address, so nothing — not `ingress`, not any pod-to-Service
+traffic — can reach anywhere. `minikube addons enable ingress` will hang on
+"Verifying ingress addon..." and eventually time out if this isn't fixed
+first.
+
+**Fix, every time after `minikube start`** (not yet persistent — resets on
+every `minikube delete`/reboot):
+
+```bash
+minikube ssh -- "sudo sysctl -w net.ipv4.conf.all.arp_ignore=0"
+```
+
+Full root-cause writeup (packet captures, how this was actually found, and
+why): `it-business/tools/k8s/k8s.md`, Case study 1.
+
 ---
 
-### Scripts
-
-To get a clear snapshot of any project you are working on, use:
+Then enable ingress addons in minikube:
 
 ```bash
-tree -I 'node_modules|.git|dist' -a -L 10
+minikube addons enable ingress
 ```
 
-To update the frontend's dependencies, cd into **/scripts** folder and run:
+Registry setup — required, any driver (containerd runtime)
+This part is not optional and not specific to any one driver — minikube's node runtime is containerd (Kubernetes removed support for Docker as an in-cluster runtime a while back), and containerd cannot see images sitting in your host's own Docker daemon. Without this step, tilt up fails with docker push: ... denied: requested access to the resource is denied — it's silently trying to push to Docker Hub's reserved library/ namespace, since no registry is configured.
 
-```bash
-./update-npm.sh
-```
+The fix is the officially-supported one, not a workaround: minikube ships its own in-cluster registry addon specifically for this, and Tilt has a built-in default_registry(...) function made to point at exactly this kind of registry.
 
-## DevOps
+minikube addons enable registry
 
-### Handy DevOps commands for local dev:
+Already wired into this project's Tiltfile:
 
-From the **repo root**, simply run (and do not forget to have your minikube instance running):
+default_registry('localhost:5000')
 
-```bash
-tilt up
-```
+local_resource(
+'registry-pf',
+serve_cmd='kubectl -n kube-system port-forward svc/registry 5000:80',
+allow_parallel=True,
+)
 
-### Stopping / Cleaning Up
-
-When you’re done and other minikube commands:
-
-```bash
-tilt down      # stops all Tilt resources
-minikube stop  # shuts down the cluster (keeps data)
----
-minikube config view # resources
-minikube status
-minikube profile list
-minikube --help
-```
-
-or to nuke everything, use:
-
-```bash
-minikube delete --all --purge   # removes the cluster completely
-```
-
-but only when:
-
-- Changed driver / core config (e.g. switched from Docker Desktop to native Docker)
-
-- Changed CPU/memory/disk size in a way that requires fresh node
-
-- The cluster is completely borked and not worth debugging
-
-To recreate stale pods:
-
-```bash
-tilt down
-kubectl get all
-kubectl get pods
-kubectl delete pod --all
-tilt up
----
-tilt logs -f
-```
+Why localhost:5000 works identically for both the push (from your host) and the pull (from inside the cluster) despite being two different processes: your host's kubectl port-forward tunnels its own localhost:5000 straight to the registry Service; separately, the addon also runs a registry-proxy on the node itself, listening on that node's own localhost:5000, forwarding to the same registry. Same address, resolved locally and correctly on both ends. Full explanation: it-business/tools/k8s/k8s.md.

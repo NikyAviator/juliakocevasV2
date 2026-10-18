@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 const SWIPE_THRESHOLD = 50; // px
 
@@ -41,7 +42,7 @@ const Modal = ({ imageSrc, altText, onClose, onNext, onPrev }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className='fixed inset-0 bg-ink/40 backdrop-blur-sm'
+            className='fixed inset-0 bg-background/80 backdrop-blur-sm'
           />
         </DialogBackdrop>
 
@@ -56,15 +57,16 @@ const Modal = ({ imageSrc, altText, onClose, onNext, onPrev }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className='relative w-full border border-border bg-surface p-6 shadow-lg'
+              className='relative w-full border border-border bg-card p-6 shadow-lg'
             >
               {/* Close Button */}
               <button
                 type='button'
                 onClick={onClose}
-                className='absolute top-2 right-2 rounded-full bg-ink p-2 text-surface hover:bg-ink-muted'
+                aria-label='Close'
+                className='absolute top-2 right-2 cursor-pointer rounded-full bg-accent p-2 text-on-accent transition-colors duration-300 hover:bg-foreground'
               >
-                X
+                <XMarkIcon className='h-5 w-5' />
               </button>
 
               {/* Previous arrow */}
@@ -76,11 +78,9 @@ const Modal = ({ imageSrc, altText, onClose, onNext, onPrev }) => {
                     onPrev();
                   }}
                   aria-label='Previous image'
-                  className='absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-ink/70 p-2 text-surface hover:bg-ink'
+                  className='absolute left-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-background/70 p-2 text-foreground transition-colors duration-300 hover:bg-background'
                 >
-                  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth={2} className='h-5 w-5'>
-                    <path strokeLinecap='round' strokeLinejoin='round' d='M15 19l-7-7 7-7' />
-                  </svg>
+                  <ChevronLeftIcon className='h-5 w-5' />
                 </button>
               )}
 
@@ -93,11 +93,9 @@ const Modal = ({ imageSrc, altText, onClose, onNext, onPrev }) => {
                     onNext();
                   }}
                   aria-label='Next image'
-                  className='absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-ink/70 p-2 text-surface hover:bg-ink'
+                  className='absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-background/70 p-2 text-foreground transition-colors duration-300 hover:bg-background'
                 >
-                  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth={2} className='h-5 w-5'>
-                    <path strokeLinecap='round' strokeLinejoin='round' d='M9 5l7 7-7 7' />
-                  </svg>
+                  <ChevronRightIcon className='h-5 w-5' />
                 </button>
               )}
 

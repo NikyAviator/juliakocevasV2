@@ -111,10 +111,6 @@ its own in-cluster registry addon specifically for this, and Tilt has a
 built-in `default_registry(...)` function made to point at exactly this
 kind of registry.
 
-```bash
-minikube addons enable registry
-```
-
 Already wired into this project's `Tiltfile`:
 
 ```python

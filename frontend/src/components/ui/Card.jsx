@@ -13,7 +13,7 @@ const fadeUp = {
 const Card = ({ imageSrc, altText, index = 0, onOpen }) => {
   return (
     <motion.div
-      className='mb-6 overflow-hidden border border-border bg-surface break-inside-avoid cursor-pointer'
+      className='mb-6 overflow-hidden border border-border bg-card break-inside-avoid cursor-pointer transition-transform duration-300 hover:scale-[1.02]'
       onClick={onOpen}
       initial='hidden'
       whileInView='visible'

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ChevronUpIcon } from '@heroicons/react/24/outline';
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,22 +30,10 @@ const ScrollToTopButton = () => {
     isVisible && (
       <button
         onClick={scrollToTop}
-        className='fixed bottom-8 right-8 bg-ink text-surface p-3 rounded-full shadow-lg hover:bg-accent transition duration-300'
+        aria-label='Scroll to top'
+        className='fixed bottom-8 right-8 z-20 cursor-pointer rounded-full bg-accent p-3 text-on-accent shadow-lg transition-colors duration-300 hover:bg-foreground'
       >
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          className='h-6 w-6'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-            d='M5 15l7-7 7 7'
-          />
-        </svg>
+        <ChevronUpIcon className='h-6 w-6' />
       </button>
     )
   );

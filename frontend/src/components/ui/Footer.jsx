@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className='w-full border-t border-border bg-background'>
+    <footer id='site-footer' className='w-full border-t border-border bg-background'>
       <div className='mx-auto max-w-7xl px-6 py-12 sm:justify-center-safe md:flex md:items-center md:justify-between lg:px-8'>
         <div className='flex items-center gap-x-4 md:order-2'>
           {/* Text to the left of icons */}

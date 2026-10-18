@@ -2,15 +2,31 @@ import { useState, useEffect } from 'react';
 import { ChevronUpIcon } from '@heroicons/react/24/outline';
 
 const ScrollToTopButton = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isPastThreshold, setIsPastThreshold] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
-  const toggleVisibility = () => {
-    if (window.scrollY > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
+  // Show the button once the user has scrolled down a bit.
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsPastThreshold(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  // Hide the button as soon as the footer enters the viewport, so it
+  // never sits on top of the footer's content (e.g. the social icons).
+  useEffect(() => {
+    const footer = document.getElementById('site-footer');
+    if (!footer) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsFooterVisible(entry.isIntersecting),
+      { rootMargin: '0px' },
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -19,12 +35,7 @@ const ScrollToTopButton = () => {
     });
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-    };
-  });
+  const isVisible = isPastThreshold && !isFooterVisible;
 
   return (
     isVisible && (

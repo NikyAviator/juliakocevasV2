@@ -49,7 +49,7 @@ export default function Header() {
       </div>
 
       {/* Scroll cue */}
-      <motion.div
+      {/* <motion.div
         className='absolute inset-x-0 bottom-10 flex justify-center'
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -65,7 +65,7 @@ export default function Header() {
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
           />
         </motion.div>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 }
